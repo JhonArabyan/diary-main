@@ -26,12 +26,13 @@ class Card(db.Model):
     text = db.Column(db.Text, nullable=False)
     #email владельца карточки
     user_email = db.Column(db.String(100), nullable=False)
-
+    #url выбранной картинки
+    url_card = db.Column(db.String(100), nullable=False)
     #Вывод объекта и id
     def __repr__(self):
         return f'<Card {self.id}>'
     
-
+ 
 #Задание №1. Создать таблицу User
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -52,9 +53,7 @@ def login():
             if form_login == user.email and form_password == user.password:
                 session['user_email'] = user.email
                 return redirect('/index')
-            
-
-     
+        return redirect('/')
     else:
         return render_template('login.html', error=error)
 
@@ -70,10 +69,7 @@ def reg():
         user = User(email=email, password=password)
         db.session.add(user)
         db.session.commit()
-
-        
         return redirect('/')
-    
     else:    
         return render_template('registration.html')
 
@@ -81,15 +77,15 @@ def reg():
 #Запуск страницы с контентом
 @app.route('/index')
 def index():
-    #Задание №4. Сделай, чтобы пользователь видел тольуо свои карточки
+    #Задание №4. Сделай, чтобы пользователь видел только свои карточки
     email = session.get('user_email')
     cards = Card.query.filter_by(user_email=email).all()
     return render_template('index.html', cards=cards)
+
 #Запуск страницы c картой
 @app.route('/card/<int:id>')
 def card(id):
     card = Card.query.get(id)
-
     return render_template('card.html', card=card)
 
 #Запуск страницы c созданием карты
@@ -97,17 +93,18 @@ def card(id):
 def create():
     return render_template('create_card.html')
 
-#Форма карты
+#PЗаполнение карты пользователем
 @app.route('/form_create', methods=['GET','POST'])
 def form_create():
     if request.method == 'POST':
         title =  request.form['title']
         subtitle =  request.form['subtitle']
         text =  request.form['text']
-
+        # получаем выбранное изображение
+        selected_image = request.form.get('image-selector')
         #Задание №4. Сделай, чтобы создание карточки происходило от имени пользователя
         email = session['user_email']
-        card = Card(title=title, subtitle=subtitle, text=text, user_email=email)
+        card = Card(title=title, subtitle=subtitle, text=text, user_email=email, url_card=selected_image)
         db.session.add(card)
         db.session.commit()
         return redirect('/index')

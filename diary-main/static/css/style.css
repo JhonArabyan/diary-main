@@ -209,6 +209,17 @@ ul {
     color: #F8FAFC;
     background:  rgba(14, 165, 233, 1);
 }
+.form__select {
+    background: #0F172A;
+    border-radius: 10px;
+    padding: 10px;
+    height:fit-content;
+    color: #F8FAFC;
+    font: inherit;
+    border: none;
+    width: 94%;
+}
+
 
 .main {
     padding: 0 5%;
