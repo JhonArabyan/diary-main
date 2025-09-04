@@ -42,7 +42,7 @@ class User(db.Model):
 #Запуск страницы с контентом
 @app.route('/', methods=['GET','POST'])
 def login():
-    error = 'Неправильно указан пользователь или пароль'
+    error = ''
     if request.method == 'POST':
         form_login = request.form['email']
         form_password = request.form['password']
@@ -53,7 +53,8 @@ def login():
             if form_login == user.email and form_password == user.password:
                 session['user_email'] = user.email
                 return redirect('/index')
-        return redirect('/')
+        error = 'Неправильно указан пользователь или пароль'
+        return render_template('login.html', error=error)
     else:
         return render_template('login.html', error=error)
 
