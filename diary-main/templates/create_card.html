@@ -26,15 +26,13 @@
                     <label for="title">
                         <input class="form__input" type="text" name="title" id="title" placeholder="Введите заголовок" required>
                     </label>
-                    
                     <label for="subtitle">
                         <input class="form__input" type="text" name="subtitle" id="subtitle" placeholder="Введите подзаголовок" required>
                     </label>
-
                     <label for="image-selector">
-                        <select class="form__select" name="image-selector" id="image-selector">
+                        <select class="form__input" name="image-selector" id="image-selector">
                             <option value="meme_1.jpg" {% if selected_image == 'meme_1.jpg' %}selected{% endif %}>Морской дворец</option>
-                            <option value="meme_2.jpg" {% if selected_image == 'meme_2.jpg' %}selected{% endif %}>Пена у берега</option>
+                            <option value="meme_2.jpg" {% if selected_image == 'meme_2.jpg' %}selected{% endif %}>Пена на берегу</option>
                         </select>
                     </label>
                 </div>

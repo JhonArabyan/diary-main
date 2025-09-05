@@ -10,13 +10,12 @@
   <link rel="stylesheet" href="../static/css/style.css">
   <title>Дневник программиста</title>
 </head>
-<body style="background-image: url(../static/img/{{card.url_card}});
-            background-size: cover;">
+<body style="background-image: url(../static/img/{{card.mem}}) ;background-size: cover;">
   <header class="header">
     <img src="../static/img/logo.svg" alt="logo" width="30" height="30">
     <ul class="main-list">
         <li class="list__item">
-          <a href="">
+          <a href="/">
             <img src="../static/img/login.svg" alt="login" width="20" height="20">
           </a>
     </ul>
@@ -29,7 +28,7 @@
       <div class="main__text">
       {{card.text}}
       </div>
-      <a class="main__link" href="/">Вернуться к записям</a>
+      <a class="main__link" href="/index">Вернуться к своим записям</a>
     </div>
   </main>
   {% endblock %}
